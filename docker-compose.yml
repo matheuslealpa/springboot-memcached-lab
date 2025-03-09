@@ -1,0 +1,25 @@
+services:
+  springboot-memcached-lab-memcached:
+    container_name: "springboot-memcached-lab-memcached"
+    image: memcached:latest
+    restart: always
+    ports:
+      - "11211:11211"
+    networks:
+      - springboot-memcached-network
+  app:
+    build: .
+    container_name: app
+    environment:
+      - MEMCACHED_HOST=springboot-memcached-lab-memcached
+      - MEMCACHED_PORT=11211
+      - MENCACHED_POLLSIZE=5
+    ports:
+      - "8080:8080"
+    depends_on:
+      - springboot-memcached-lab-memcached
+    networks:
+      - springboot-memcached-network
+networks:
+  springboot-memcached-network:
+    driver: bridge
