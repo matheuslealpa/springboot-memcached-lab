@@ -1,0 +1,6 @@
+spring.application.name=springboot-memcached-lab
+
+memcached.cache.servers=${MEMCACHED_CACHE_SERVERS:http://localhost:11211}
+memcached.cache.provider=static
+memcached.cache.expiration=1d
+
